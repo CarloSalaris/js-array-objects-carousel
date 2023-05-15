@@ -35,6 +35,7 @@ const images = [
 
 // reference agli elementi in HTML
 const itemContainer = document.getElementById("itemContainer");
+const thumbnailSlide = document.getElementById("thumbnailSlide");
 const buttonDown = document.getElementById("buttonDown");
 const buttonUp = document.getElementById("buttonUp");
 
@@ -49,6 +50,7 @@ images.forEach(element =>
                 <div class="imgInfo">${element.text}</div>
             </div>
         </div>`;
+
     }
 );
 
@@ -56,7 +58,11 @@ images.forEach(element =>
 let activePosition = 0;
 
 const itemContainerList = document.getElementsByClassName("item");
+const thumbnailsList = document.getElementsByClassName("thumbnail");
+
 itemContainerList[activePosition].classList.add("active");
+thumbnailsList[activePosition].classList.add("thumbActive");
+
 
 // attivare l'evento 'click' per il buttonDown
 buttonDown.addEventListener("click",
@@ -73,8 +79,12 @@ buttonDown.addEventListener("click",
 
         //rimuovere la classe active dall'item attuale
         document.querySelector(".item.active").classList.remove("active");
+        document.querySelector(".thumbnail.thumbActive").classList.remove("thumbActive");
+
         //assegnare la classe active all'item successivo
         itemContainerList[activePosition].classList.add("active");
+        thumbnailsList[activePosition].classList.add("thumbActive");
+
     }
 );
 
