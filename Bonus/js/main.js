@@ -1,12 +1,8 @@
-/* Milestone 1:
-Ora rimuoviamo i contenuti statici e usiamo l’array di oggetti letterali per popolare dinamicamente il carosello.
-Al click dell’utente sulle frecce verso sopra e sotto, l’immagine attiva diventerà visibile e dovremo aggiungervi titolo e testo. */
+/* BONUS 2:
+Aggiungere funzionalità di autoplay: dopo un certo periodo di tempo (3 secondi) l’immagine attiva dovrà cambiare alla successiva. */
+let clock = setInterval(buttonDownFunc, 3000);
 
-/* Milestone 2:
-Aggiungere il **ciclo infinito** del carosello.
-Ovvero se l’immagine attiva è la prima e l’utente clicca la freccia verso sopra, l’immagine che deve attivarsi sarà l’ultima e viceversa per l’ultima miniatura se l’utente clicca la freccia verso sotto. */
 
-// Milestone 1 + Milestone 2
 
 // Array degli oggetti immagine
 const images = [
@@ -59,7 +55,7 @@ images.forEach(element =>
 );
 
 // inserire classe active al div dell'immagine visibile
-let activePosition = 2;
+let activePosition = 2; //Immagine centrale
 
 const itemContainerList = document.getElementsByClassName("item");
 const thumbnailsList = document.getElementsByClassName("thumbnail");
@@ -69,46 +65,49 @@ thumbnailsList[activePosition].classList.add("thumbActive");
 
 
 // attivare l'evento 'click' per il buttonDown
-buttonDown.addEventListener("click",
-    
-    function buttonDownFunc() {
-        if (activePosition == images.length - 1) {
-            //reset activePosition
-            activePosition = 0;        
-        } else {
-            //incrementare il valore di activePosition
-            activePosition++;
-        }
-
-        //rimuovere la classe active dall'item attuale
-        document.querySelector(".item.active").classList.remove("active");
-        document.querySelector(".thumbnail.thumbActive").classList.remove("thumbActive");
-
-        //assegnare la classe active all'item successivo
-        itemContainerList[activePosition].classList.add("active");
-        thumbnailsList[activePosition].classList.add("thumbActive");
-    }
-);
+buttonDown.addEventListener("click", buttonDownFunc);
 
 // attivare l'evento 'click' per il buttonUp
-buttonUp.addEventListener("click",
-    
-    function buttonUpFunc() {
-        if (activePosition == 0) {
-            //reset activePosition
-            activePosition = images.length - 1;
-            
-        } else {
-            //incrementare il valore di activePosition
-            activePosition--;
-        }
+buttonUp.addEventListener("click", buttonUpFunc);
 
-        //rimuovere la classe active dall'item attuale
-        document.querySelector(".item.active").classList.remove("active");
-        document.querySelector(".thumbnail.thumbActive").classList.remove("thumbActive");
 
-        //assegnare la classe active all'item successivo
-        itemContainerList[activePosition].classList.add("active");
-        thumbnailsList[activePosition].classList.add("thumbActive");
+/* FUNCTIONS */
+
+function buttonDownFunc() {
+    if (activePosition == images.length - 1) {
+        //reset activePosition
+        activePosition = 0;        
+    } else {
+        //incrementare il valore di activePosition
+        activePosition++;
     }
-);
+
+    //rimuovere la classe active dall'item attuale
+    document.querySelector(".item.active").classList.remove("active");
+    document.querySelector(".thumbnail.thumbActive").classList.remove("thumbActive");
+
+    //assegnare la classe active all'item successivo
+    itemContainerList[activePosition].classList.add("active");
+    thumbnailsList[activePosition].classList.add("thumbActive");
+}
+
+function buttonUpFunc() {
+    if (activePosition == 0) {
+        //reset activePosition
+        activePosition = images.length - 1;
+        
+    } else {
+        //incrementare il valore di activePosition
+        activePosition--;
+    }
+
+    //rimuovere la classe active dall'item attuale
+    document.querySelector(".item.active").classList.remove("active");
+    document.querySelector(".thumbnail.thumbActive").classList.remove("thumbActive");
+
+    //assegnare la classe active all'item successivo
+    itemContainerList[activePosition].classList.add("active");
+    thumbnailsList[activePosition].classList.add("thumbActive");
+}
+
+
