@@ -19,10 +19,10 @@ img {
 }
 
 #slide {
-    height: 400px;
+    height: 350px;
     /* max-height: 100%; */
-    width: 900px;
-    /* max-width: 1000px; */
+    width: 80%;
+    max-width: 1000px;
     position: relative;
     display: flex;
     justify-content: center;
@@ -35,8 +35,18 @@ img {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 80%;
     height: 100%;
+}
+
+#thumbnailSlide {
+    width: 20%;
+    height: 100%;
+}
+
+.thumbnail {
+    height: 20%;
+    
 }
 
 .item {
@@ -99,3 +109,7 @@ img {
 #itemContainer {
     border: solid 2px darkslategrey;
 } */
+
+#thumbnailSlide {
+    border: solid 1px;
+}

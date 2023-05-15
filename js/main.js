@@ -33,7 +33,7 @@ const images = [
     }
 ];
 
-// referenza agli elementi in HTML
+// reference agli elementi in HTML
 const itemContainer = document.getElementById("itemContainer");
 const buttonDown = document.getElementById("buttonDown");
 const buttonUp = document.getElementById("buttonUp");
