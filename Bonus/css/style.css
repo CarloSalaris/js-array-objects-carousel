@@ -98,9 +98,40 @@ img {
     UTILITIES
 ************************/
 
+#container #slide:hover .showHidden  {
+    display: inline-block;
+}
+
 /* Buttons */
+button {
+    cursor: pointer;
+}
+
+/* Autoplay */
+#autoplayButtons {
+    display: none;
+    text-align: center;
+    padding: 50px;
+    position: absolute;
+    left: 40%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    background-color: rgba(0, 0, 0, 0.5);
+    border-radius: 15px;
+}
+
+#autoplayButtons button {
+    width: 40px;
+    padding: 10px;
+    margin: 10px;
+    border: none;
+    border-radius: 10px;
+}
+
+/* Skip up or down */
 #buttonUp,
 #buttonDown {
+    display: none;
     position: absolute;
     left: 50%;
     translate: -50%;

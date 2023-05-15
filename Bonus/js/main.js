@@ -1,8 +1,11 @@
 /* BONUS 2:
 Aggiungere funzionalità di autoplay: dopo un certo periodo di tempo (3 secondi) l’immagine attiva dovrà cambiare alla successiva. */
-let clock = setInterval(buttonDownFunc, 3000);
+let clockDown = setInterval(buttonDownFunc, 3000);
+let clockUp;
 
-
+/* BONUS 3:
+Aggiungere pulsanti di start/stop e di inversione del meccanismo di autoplay. */
+let DownOrder;
 
 // Array degli oggetti immagine
 const images = [
@@ -34,6 +37,9 @@ const itemContainer = document.getElementById("itemContainer");
 const thumbnailContainer = document.getElementById("thumbnailContainer");
 const buttonDown = document.getElementById("buttonDown");
 const buttonUp = document.getElementById("buttonUp");
+const playButton = document.getElementById("playButton");
+const pauseButton = document.getElementById("pauseButton");
+const invertButton = document.getElementById("invertButton");
 
 // Aggiungo immagini al DOM in modo dinamico
 images.forEach(element =>
@@ -70,6 +76,42 @@ buttonDown.addEventListener("click", buttonDownFunc);
 // attivare l'evento 'click' per il buttonUp
 buttonUp.addEventListener("click", buttonUpFunc);
 
+// Fermare il ciclo automatico
+pauseButton.addEventListener("click",
+    function pauseFunc() {
+            clearInterval(clockDown);
+            clearInterval(clockUp)  
+    }
+);
+
+// Far ripartire il ciclo
+playButton.addEventListener("click",
+    function playFunc() {
+        if (DownOrder === true) {
+            clearInterval(clockDown);
+            clockDown = setInterval(buttonDownFunc, 3000);
+        }else{
+            clearInterval(clockUp);
+            clockUp = setInterval(buttonUpFunc, 3000);
+        }
+    }
+);
+
+// Invertire il ciclo
+invertButton.addEventListener("click",
+    function invertFunc() {
+        if (DownOrder === true) {
+            clearInterval(clockDown);
+            clockUp = setInterval(buttonUpFunc, 3000);
+        }else{
+            clearInterval(clockUp);
+            clockDown = setInterval(buttonDownFunc, 3000);
+        }
+    }
+);
+
+
+
 
 /* FUNCTIONS */
 
@@ -89,6 +131,8 @@ function buttonDownFunc() {
     //assegnare la classe active all'item successivo
     itemContainerList[activePosition].classList.add("active");
     thumbnailsList[activePosition].classList.add("thumbActive");
+
+    DownOrder = true;
 }
 
 function buttonUpFunc() {
@@ -108,6 +152,8 @@ function buttonUpFunc() {
     //assegnare la classe active all'item successivo
     itemContainerList[activePosition].classList.add("active");
     thumbnailsList[activePosition].classList.add("thumbActive");
+
+    DownOrder = false;
 }
 
 
