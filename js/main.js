@@ -6,7 +6,7 @@ Al click dell’utente sulle frecce verso sopra e sotto, l’immagine attiva div
 Aggiungere il **ciclo infinito** del carosello.
 Ovvero se l’immagine attiva è la prima e l’utente clicca la freccia verso sopra, l’immagine che deve attivarsi sarà l’ultima e viceversa per l’ultima miniatura se l’utente clicca la freccia verso sotto. */
 
-// Milestone 1
+// Milestone 1 + Milestone 2
 
 // Array degli oggetti immagine
 const images = [
@@ -62,8 +62,14 @@ itemContainerList[activePosition].classList.add("active");
 buttonDown.addEventListener("click",
     
     function buttonDownFunc() {
-
+        if (activePosition == images.length - 1) {
+            //reset activePosition
+            activePosition = 0;
+            
+        } else {
+            //incrementare il valore di activePosition
             activePosition++;
+        }
 
         //rimuovere la classe active dall'item attuale
         document.querySelector(".item.active").classList.remove("active");
@@ -76,8 +82,14 @@ buttonDown.addEventListener("click",
 buttonUp.addEventListener("click",
     
     function buttonUpFunc() {
-
+        if (activePosition == 0) {
+            //reset activePosition
+            activePosition = images.length - 1;
+            
+        } else {
+            //incrementare il valore di activePosition
             activePosition--;
+        }
 
         //rimuovere la classe active dall'item attuale
         document.querySelector(".item.active").classList.remove("active");
