@@ -5,7 +5,7 @@ let clockUp;
 
 /* BONUS 3:
 Aggiungere pulsanti di start/stop e di inversione del meccanismo di autoplay. */
-let DownOrder;
+let DownOrder; //true or false per gestire l'ordine di scorrimento
 
 // Array degli oggetti immagine
 const images = [
@@ -109,8 +109,6 @@ invertButton.addEventListener("click",
         }
     }
 );
-
-
 
 
 /* FUNCTIONS */
