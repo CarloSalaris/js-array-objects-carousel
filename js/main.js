@@ -35,7 +35,7 @@ const images = [
 
 // reference agli elementi in HTML
 const itemContainer = document.getElementById("itemContainer");
-const thumbnailSlide = document.getElementById("thumbnailSlide");
+const thumbnailContainer = document.getElementById("thumbnailContainer");
 const buttonDown = document.getElementById("buttonDown");
 const buttonUp = document.getElementById("buttonUp");
 
@@ -51,11 +51,15 @@ images.forEach(element =>
             </div>
         </div>`;
 
+        thumbnailContainer.innerHTML +=
+        `<div class="thumbnail">
+            <img src="${element.image}" alt="thumb image">
+        </div>`;
     }
 );
 
 // inserire classe active al div dell'immagine visibile
-let activePosition = 0;
+let activePosition = 2;
 
 const itemContainerList = document.getElementsByClassName("item");
 const thumbnailsList = document.getElementsByClassName("thumbnail");
@@ -70,8 +74,7 @@ buttonDown.addEventListener("click",
     function buttonDownFunc() {
         if (activePosition == images.length - 1) {
             //reset activePosition
-            activePosition = 0;
-            
+            activePosition = 0;        
         } else {
             //incrementare il valore di activePosition
             activePosition++;
@@ -84,7 +87,6 @@ buttonDown.addEventListener("click",
         //assegnare la classe active all'item successivo
         itemContainerList[activePosition].classList.add("active");
         thumbnailsList[activePosition].classList.add("thumbActive");
-
     }
 );
 
@@ -103,7 +105,10 @@ buttonUp.addEventListener("click",
 
         //rimuovere la classe active dall'item attuale
         document.querySelector(".item.active").classList.remove("active");
+        document.querySelector(".thumbnail.thumbActive").classList.remove("thumbActive");
+
         //assegnare la classe active all'item successivo
         itemContainerList[activePosition].classList.add("active");
+        thumbnailsList[activePosition].classList.add("thumbActive");
     }
 );
