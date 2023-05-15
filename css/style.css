@@ -46,7 +46,12 @@ img {
 
 .thumbnail {
     height: 20%;
+    filter: opacity(.7);
+}
 
+.thumbActive {
+    filter: opacity(1);
+    border: solid 2px #ffffff;
 }
 
 .item {
