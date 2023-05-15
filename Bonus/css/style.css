@@ -59,12 +59,14 @@ img {
     }
 
         .overImg {
+            height: 40%;
             padding: 20px;
             position: absolute;
             right: 0;
             bottom: 0;
             text-align: right;
             color: #ffffff;
+            background-color: rgba(105, 105, 105, 0.35);
         }
 
             .imgTitle {
