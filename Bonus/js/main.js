@@ -5,7 +5,8 @@ let clockUp;
 
 /* BONUS 3:
 Aggiungere pulsanti di start/stop e di inversione del meccanismo di autoplay. */
-let DownOrder; //true or false per gestire l'ordine di scorrimento
+let downOrder; //true or false per gestire l'ordine di scorrimento
+let autoPlay; //true se è in movimento 
 
 // Array degli oggetti immagine
 const images = [
@@ -37,8 +38,7 @@ const itemContainer = document.getElementById("itemContainer");
 const thumbnailContainer = document.getElementById("thumbnailContainer");
 const buttonDown = document.getElementById("buttonDown");
 const buttonUp = document.getElementById("buttonUp");
-const playButton = document.getElementById("playButton");
-const pauseButton = document.getElementById("pauseButton");
+const playPauseButton = document.getElementById("playPauseButton");
 const invertButton = document.getElementById("invertButton");
 
 // Aggiungo immagini al DOM in modo dinamico
@@ -76,31 +76,31 @@ buttonDown.addEventListener("click", buttonDownFunc);
 // attivare l'evento 'click' per il buttonUp
 buttonUp.addEventListener("click", buttonUpFunc);
 
-// Fermare il ciclo automatico
-pauseButton.addEventListener("click",
-    function pauseFunc() {
+// Fermare e far ripartire il ciclo automatico
+playPauseButton.addEventListener("click",
+    function playPauseFunc() {
+        
+        if (autoPlay == true) { //pause
             clearInterval(clockDown);
-            clearInterval(clockUp)  
-    }
-);
-
-// Far ripartire il ciclo
-playButton.addEventListener("click",
-    function playFunc() {
-        if (DownOrder === true) {
-            clearInterval(clockDown);
-            clockDown = setInterval(buttonDownFunc, 3000);
-        }else{
             clearInterval(clockUp);
-            clockUp = setInterval(buttonUpFunc, 3000);
-        }
+            autoPlay = false;
+        }else{ //play
+            if (downOrder === true) {
+                clearInterval(clockDown);
+                clockDown = setInterval(buttonDownFunc, 3000);
+            }else{
+                clearInterval(clockUp);
+                clockUp = setInterval(buttonUpFunc, 3000);
+            }    
+            autoPlay = true;
+        }             
     }
 );
 
 // Invertire il ciclo
 invertButton.addEventListener("click",
     function invertFunc() {
-        if (DownOrder === true) {
+        if (downOrder === true) {
             clearInterval(clockDown);
             clockUp = setInterval(buttonUpFunc, 3000);
         }else{
@@ -130,7 +130,8 @@ function buttonDownFunc() {
     itemContainerList[activePosition].classList.add("active");
     thumbnailsList[activePosition].classList.add("thumbActive");
 
-    DownOrder = true;
+    autoPlay = true;
+    downOrder = true;
 }
 
 function buttonUpFunc() {
@@ -151,7 +152,8 @@ function buttonUpFunc() {
     itemContainerList[activePosition].classList.add("active");
     thumbnailsList[activePosition].classList.add("thumbActive");
 
-    DownOrder = false;
+    autoPlay = true;
+    downOrder = false;
 }
 
 
