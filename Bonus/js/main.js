@@ -71,29 +71,28 @@ thumbnailsList[activePosition].classList.add("thumbActive");
 
 
 // attivare l'evento 'click' per il buttonDown
-buttonDown.addEventListener("click", buttonDownFunc);
+buttonDown.addEventListener("click",
+function() {
+    buttonDownFunc();
+    pauseFunc();
+});
 
 // attivare l'evento 'click' per il buttonUp
-buttonUp.addEventListener("click", buttonUpFunc);
+buttonUp.addEventListener("click",
+function() {
+    buttonUpFunc();
+    pauseFunc();
+});
 
 // Fermare e far ripartire il ciclo automatico
 playPauseButton.addEventListener("click",
     function playPauseFunc() {
         
         if (autoPlay == true) { //pause
-            clearInterval(clockDown);
-            clearInterval(clockUp);
-            autoPlay = false;
+            pauseFunc();
         }else{ //play
-            if (downOrder === true) {
-                clearInterval(clockDown);
-                clockDown = setInterval(buttonDownFunc, 3000);
-            }else{
-                clearInterval(clockUp);
-                clockUp = setInterval(buttonUpFunc, 3000);
-            }    
-            autoPlay = true;
-        }             
+            playFunc()
+        }
     }
 );
 
@@ -154,6 +153,23 @@ function buttonUpFunc() {
 
     autoPlay = true;
     downOrder = false;
+}
+
+function pauseFunc() {
+    clearInterval(clockDown);
+    clearInterval(clockUp);
+    autoPlay = false;
+}
+
+function playFunc() {
+    if (downOrder === true) {
+        clearInterval(clockDown);
+        clockDown = setInterval(buttonDownFunc, 3000);
+    }else{
+        clearInterval(clockUp);
+        clockUp = setInterval(buttonUpFunc, 3000);
+    }    
+    autoPlay = true;
 }
 
 
